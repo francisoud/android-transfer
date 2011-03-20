@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
     >
     <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/speedSelectionLinearLayout">
-        <EditText android:layout_height="wrap_content" android:id="@+id/editSpeedText" android:inputType="number|numberDecimal" android:layout_width="200dip" android:text="10"></EditText>
+        <EditText android:layout_height="wrap_content" android:id="@+id/editSpeedText" android:inputType="number|numberDecimal" android:layout_width="200dip" android:text="0"></EditText>
         <Spinner android:layout_height="wrap_content" android:id="@+id/unitSpinner" android:layout_width="fill_parent"></Spinner>
     </LinearLayout>
     <ListView android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/listView"></ListView>

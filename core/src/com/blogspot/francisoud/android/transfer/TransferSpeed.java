@@ -1,5 +1,6 @@
 package com.blogspot.francisoud.android.transfer;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -24,6 +25,12 @@ public class TransferSpeed extends Activity {
 	private UnitAdapter unitAdapter;
 	private DevicesAdapter devicesAdapter;
 
+	private DecimalFormat formatter = new DecimalFormat();
+
+	public TransferSpeed() {
+		formatter.setDecimalSeparatorAlwaysShown(false);
+	}
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -34,6 +41,7 @@ public class TransferSpeed extends Activity {
 		devicesAdapter = new DevicesAdapter(this);
 
 		final Spinner unitSpinner = (Spinner) findViewById(R.id.unitSpinner);
+		unitSpinner.setSelected(false);
 		unitAdapter
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		unitSpinner.setAdapter(unitAdapter);
@@ -69,8 +77,11 @@ public class TransferSpeed extends Activity {
 			final AvailableUnit unit = unitAdapter.getUnit(position);
 			final double bits = Converter.toBit(new Double(value),
 					unit.getPower(), unit.getUnit());
-			Toast.makeText(getApplicationContext(),
-					Double.toString(bits) + "Bit/s", Toast.LENGTH_SHORT).show();
+			Log.d(TAG, "bits: " + bits);
+			final String displayBits = formatter.format(bits);
+			// final String displayBits = Double.toString(bits);
+			Toast.makeText(getApplicationContext(), displayBits + " Bit/s",
+					Toast.LENGTH_SHORT).show();
 			final List<Device> devices = new ArrayList<Device>(Device.getList());
 			// FIXME use externalize string R.string.you;
 			final String label = "You are here";
