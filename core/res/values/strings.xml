@@ -2,14 +2,26 @@
 <resources>
     <string name="app_name">Transfer Speed Throughput</string>
     <string-array name="units">
-        <item>Bit/s</item>
-        <item>Byte/s</item>
-        <item>Kbit/s</item>
-        <item>Ko/s  (Kilooctets)</item>
-        <item>Mio/s (Megaoctets)</item>
-        <item>Gio/s (Gigaoctets)</item>
+        <item>bps (Bit)</item>
+        <item>Bit/s (Bit)</item>
+        <item>B/s (Byte)</item>
+        <item>Byte/s (Byte)</item>
+        <item>Octet/s (Octet)</item>
+        <item>kbps (Kilobit)</item>
+        <item>Kibit/s (Kilobit)</item>
+        <item>KB/s (Kilobyte)</item>
         <item>KiB/s (Kilobyte)</item>
+        <item>Ko/s  (Kilo-octets)</item>
+        <item>mbps (Megabit)</item>
+        <item>Mibit/s (Megabit)</item>
+        <item>MB/s (Megabyte)</item>
         <item>MiB/s (Megabyte)</item>
+        <item>Mio/s (Mega-octets)</item>
+        <item>gbps (Gigabit)</item>
+        <item>Gibit/s (Gigabit)</item>
+        <item>GB/s (Gigabyte)</item>
         <item>GiB/s (Gigabyte)</item>
+        <item>Gio/s (Giga-octets)</item>
     </string-array>
+    <string name="you">You are here</string>
 </resources>
