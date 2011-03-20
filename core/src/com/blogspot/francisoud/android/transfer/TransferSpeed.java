@@ -71,10 +71,7 @@ public class TransferSpeed extends Activity {
 					unit.getPower(), unit.getUnit());
 			Toast.makeText(getApplicationContext(),
 					Double.toString(bits) + "Bit/s", Toast.LENGTH_SHORT).show();
-			final List<Device> defaultDevices = Device.getList();
-			final List<Device> devices = new ArrayList<Device>(
-					defaultDevices.size());
-			Collections.copy(devices, defaultDevices);
+			final List<Device> devices = new ArrayList<Device>(Device.getList());
 			// FIXME use externalize string R.string.you;
 			final String label = "You are here";
 			devices.add(new Device(label, bits));
