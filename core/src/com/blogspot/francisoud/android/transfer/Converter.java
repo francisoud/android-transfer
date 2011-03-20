@@ -2,11 +2,11 @@ package com.blogspot.francisoud.android.transfer;
 
 public class Converter {
 
-	enum Unit {
+	public enum Unit {
 		Bit, Byte, Octet
 	};
 
-	enum Power {
+	public enum Power {
 		None(0), Kilo(1), Mega(2), Giga(3);
 
 		private int multiple;
@@ -20,35 +20,47 @@ public class Converter {
 		}
 	};
 
-	public static double byte2bit(double bytes) {
-		return bytes * 8;
-	}
-
+	/**
+	 * Trasnform any value to bit.
+	 */
 	public static double toBit(double value, Power power, Unit unit) {
-		final double bits;
-		final int multiple = power.getMultiple() ^ 1024;
+		double bits;
 		switch (unit) {
 		case Byte:
 		case Octet:
-			if (multiple == 0) {
-				bits = byte2bit(value);
-			} else {
-				bits = byte2bit(value / multiple);
-			}
+			bits = byte2bit(value);
 			break;
 		case Bit:
 		default:
-			if (multiple == 0) {
-				bits = value;
-			} else {
-				bits = value / multiple;
-			}
+			bits = value;
 			break;
 		}
-		return bits;
+		return bits * Math.pow(1024, power.getMultiple());
 	}
 
+	/**
+	 * Transform the bit value to Kilo Byte depending on power/unit param.
+	 */
 	public static double fromBit(double bits, Power power, Unit unit) {
-		return 0.0;
+		double result;
+		switch (unit) {
+		case Byte:
+		case Octet:
+			result = bit2byte(bits);
+			break;
+		case Bit:
+		default:
+			result = bits;
+			break;
+		}
+		return result / Math.pow(1024, power.getMultiple());
+	}
+
+	private static double byte2bit(double bytes) {
+		return bytes * 8;
+	}
+
+	private static double bit2byte(double bits) {
+		return bits / 8;
 	}
 }
