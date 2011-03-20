@@ -12,11 +12,11 @@ public class Device implements Comparable<Device> {
 	static {
 		Log.d(TransferSpeed.TAG, "Init device list");
 		DEVICES = new ArrayList<Device>();
+		DEVICES.add(new Device("USB 1", 1.2582912E7));
+		DEVICES.add(new Device("USB 2", 5.0331648E8));
+		DEVICES.add(new Device("USB 3", 5.1539607552E9));
 		DEVICES.add(new Device("Firewire", 0));
 		DEVICES.add(new Device("Firewire 2", 0));
-		DEVICES.add(new Device("USB", 0));
-		DEVICES.add(new Device("USB 2", 0));
-		DEVICES.add(new Device("USB 3", 0));
 	}
 
 	private final String label;
