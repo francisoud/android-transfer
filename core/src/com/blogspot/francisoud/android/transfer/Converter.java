@@ -18,6 +18,14 @@ public class Converter {
 		public int getMultiple() {
 			return multiple;
 		}
+
+		@Override
+		public String toString() {
+			if (this == None) {
+				return "";
+			}
+			return super.toString();
+		}
 	};
 
 	/**
