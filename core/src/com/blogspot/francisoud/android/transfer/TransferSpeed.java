@@ -9,11 +9,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class TransferSpeed extends Activity {
 
@@ -30,7 +33,18 @@ public class TransferSpeed extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		unitAdapter = new UnitAdapter(this, android.R.layout.simple_spinner_item);
-		devicesAdapter = new ArrayAdapter<Device>(this, R.layout.device);
+		devicesAdapter = new ArrayAdapter<Device>(this, R.layout.device) {
+			public View getView(int position, View convertView, android.view.ViewGroup parent) {
+				final View deviceView = super.getView(position, convertView, parent);
+				Device device = getItem(position);
+				if (device.isHere()) {
+					deviceView.setBackgroundResource(R.color.here);
+				} else {
+					deviceView.setBackgroundResource(R.color.black);
+				}
+				return deviceView;
+			}
+		};
 
 		// unit selection
 		final Spinner unitSpinner = (Spinner) findViewById(R.id.unitSpinner);
@@ -49,6 +63,7 @@ public class TransferSpeed extends Activity {
 	private final class OkButtonListener implements OnClickListener {
 		@Override
 		public void onClick(View view) {
+			devicesAdapter.clear();
 			final Spinner unitSpinner = (Spinner) findViewById(R.id.unitSpinner);
 			final String value = ((EditText) findViewById(R.id.editSpeedText)).getText().toString();
 			if (Log.isLoggable(TAG, Log.DEBUG)) {
@@ -62,15 +77,23 @@ public class TransferSpeed extends Activity {
 			// FIXME use externalize string R.string.you;
 			final String label = "==> You are here";
 			final Device here = new Device(label, bits);
+			here.setHere(true);
 			devices.add(here);
 			Collections.sort(devices);
 			devicesAdapter.setNotifyOnChange(false);
-			devicesAdapter.clear();
+
 			for (Device device : devices) {
 				device.setPower(unit.getPower());
 				device.setUnit(unit.getUnit());
 				devicesAdapter.add(device);
 			}
+			final ListView listView = (ListView) findViewById(R.id.listView);
+			listView.setOnItemClickListener(new OnItemClickListener() {
+				@Override
+				public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
+					Toast.makeText(getApplicationContext(), devices.get(position).help(), Toast.LENGTH_SHORT).show();
+				}
+			});
 			devicesAdapter.notifyDataSetChanged();
 		}
 	}
