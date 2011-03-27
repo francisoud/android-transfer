@@ -90,7 +90,7 @@ public class Device implements Comparable<Device> {
 
 	public String help() {
 		final String value = FormatUtils.format(Converter.fromBit(bitsPerSeconde, power, unit));
-		return label + " - " + value + " " + power.toString() + unit.toString() + "/s";
+		return label + " - Theorical: " + value + " " + power.toString() + unit.toString() + "/s";
 	}
 
 	public boolean isHere() {
