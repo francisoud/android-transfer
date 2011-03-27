@@ -68,7 +68,7 @@ public class Device implements Comparable<Device> {
 	@Override
 	public String toString() {
 		final String value = FormatUtils.format(Converter.fromBit(bitsPerSeconde, power, unit));
-		return label + " (" + value + " " + power.toString() + unit.toString() + "/s)";
+		return label + " - " + value + " " + power.toString() + unit.toString() + "/s";
 	}
 
 	public Power getPower() {
