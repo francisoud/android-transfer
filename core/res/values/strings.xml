@@ -2,4 +2,6 @@
 <resources>
     <string name="app_name">Transfer Speed Throughput</string>
     <string name="ok_button">Ok</string>
+    <color name="here">#FF0000</color>
+    <color name="black">#000000</color>
 </resources>

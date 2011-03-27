@@ -45,6 +45,8 @@ public class Device implements Comparable<Device> {
 
 	private Unit unit;
 
+	private boolean isHere = false;
+
 	private final double bitsPerSeconde;
 
 	public Device(final String label, final double bitsPerSeconde) {
@@ -67,8 +69,7 @@ public class Device implements Comparable<Device> {
 
 	@Override
 	public String toString() {
-		final String value = FormatUtils.format(Converter.fromBit(bitsPerSeconde, power, unit));
-		return label + " - " + value + " " + power.toString() + unit.toString() + "/s";
+		return label;
 	}
 
 	public Power getPower() {
@@ -85,5 +86,18 @@ public class Device implements Comparable<Device> {
 
 	public void setUnit(Unit unit) {
 		this.unit = unit;
+	}
+
+	public String help() {
+		final String value = FormatUtils.format(Converter.fromBit(bitsPerSeconde, power, unit));
+		return label + " - " + value + " " + power.toString() + unit.toString() + "/s";
+	}
+
+	public boolean isHere() {
+		return isHere;
+	}
+
+	public void setHere(boolean isHere) {
+		this.isHere = isHere;
 	}
 }
