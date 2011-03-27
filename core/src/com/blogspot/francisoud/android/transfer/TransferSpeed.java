@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -22,7 +23,7 @@ public class TransferSpeed extends Activity {
 	// .createFromResource(this, R.array.units,
 	// android.R.layout.simple_spinner_item);
 	private UnitAdapter unitAdapter;
-	private DevicesAdapter devicesAdapter;
+	private ArrayAdapter<Device> devicesAdapter;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -30,14 +31,11 @@ public class TransferSpeed extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		unitAdapter = new UnitAdapter(this, android.R.layout.simple_spinner_item);
-		devicesAdapter = new DevicesAdapter(this);
+		devicesAdapter = new ArrayAdapter<Device>(this, R.layout.device);
 
 		final Spinner unitSpinner = (Spinner) findViewById(R.id.unitSpinner);
-		unitSpinner.setSelected(false);
 		unitAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		unitSpinner.setAdapter(unitAdapter);
-		// select Kio/s
-		// unitSpinner.setSelection(3);
 		unitSpinner.setOnItemSelectedListener(new OnUnitSelectedListener());
 
 		final ListView listView = (ListView) findViewById(R.id.listView);
