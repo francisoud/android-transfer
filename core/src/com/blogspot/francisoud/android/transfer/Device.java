@@ -117,7 +117,19 @@ public class Device implements Comparable<Device> {
 
 	public String help() {
 		final String value = FormatUtils.format(Converter.fromBit(bitsPerSeconde, power, unit));
-		return label + " - Theorical: " + value + " " + power.toString() + unit.toString() + "/s";
+		final StringBuilder sb = new StringBuilder(30);
+		if (isHere) {
+			sb.append("You - ");
+		} else {
+			sb.append(label);
+			sb.append(" - Theorical: ");
+		}
+		sb.append(value);
+		sb.append(" ");
+		sb.append(power.toString());
+		sb.append(unit.toString());
+		sb.append("/s");
+		return sb.toString();
 	}
 
 	public boolean isHere() {
