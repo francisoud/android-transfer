@@ -5,10 +5,12 @@ import java.util.Collections;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -21,9 +23,6 @@ import android.widget.Toast;
 public class TransferSpeed extends Activity {
 
 	public static final String TAG = "TransferSpeed";
-	// private final ArrayAdapter<CharSequence> unitAdapter = ArrayAdapter
-	// .createFromResource(this, R.array.units,
-	// android.R.layout.simple_spinner_item);
 	private UnitAdapter unitAdapter;
 	private ArrayAdapter<Device> devicesAdapter;
 
@@ -64,6 +63,9 @@ public class TransferSpeed extends Activity {
 		@Override
 		public void onClick(View view) {
 			devicesAdapter.clear();
+			Log.d(TAG, "hide keyboard");
+			final InputMethodManager keyboard = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+			keyboard.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 			final Spinner unitSpinner = (Spinner) findViewById(R.id.unitSpinner);
 			final String value = ((EditText) findViewById(R.id.editSpeedText)).getText().toString();
 			if (Log.isLoggable(TAG, Log.DEBUG)) {
